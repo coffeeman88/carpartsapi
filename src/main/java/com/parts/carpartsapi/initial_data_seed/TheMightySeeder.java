@@ -168,6 +168,7 @@ public class TheMightySeeder {
         carPartManager.save(carPart7);
         carPartManager.save(carPart8);
         carPartManager.save(carPart9);
+        carPartManager.save(carPart10);
 
 
 
