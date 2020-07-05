@@ -1,6 +1,5 @@
 package com.parts.carpartsapi.api;
 
-import com.parts.carpartsapi.entity.Car;
 import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
 

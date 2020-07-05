@@ -22,7 +22,7 @@ public class Car implements java.io.Serializable {
     private String model;
     private LocalDate ProdStartDate;
     private LocalDate ProdEndDate;
-       @JsonBackReference
+    @JsonBackReference
     @ManyToMany(mappedBy = "cars", cascade = CascadeType.ALL)
     private List<CarPart> parts;
 

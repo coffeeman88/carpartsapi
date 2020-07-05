@@ -158,7 +158,7 @@ public class TheMightySeeder {
         carPart9.setCars(Arrays.asList(car4));
         CarPart carPart10 = new CarPart();
         carPart10.setCpartname("Szyba");
-        carPart10.setDescription("Szyba boczna przod");
+        carPart10.setDescription("Szyba boczna tyl");
         carPart10.setTags(Arrays.asList("Doskonala jakosc", "Krystaliczny widok"));
         carPart10.setShippingdays(3);
         carPart10.setPrice(400);

@@ -5,7 +5,6 @@ import com.parts.carpartsapi.manager.CarManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class CarApi {
     @GetMapping("/brandmodel")
     public List<Car> getAllByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
 
-    return carManager.findByBrandAndModel(brand, model);
+        return carManager.findByBrandAndModel(brand, model);
 
     }
 
@@ -37,7 +36,7 @@ public class CarApi {
     }
 
     @PutMapping("/add")
-    public void save (@RequestBody Car car){
+    public void save(@RequestBody Car car) {
         carManager.save(car);
     }
 }

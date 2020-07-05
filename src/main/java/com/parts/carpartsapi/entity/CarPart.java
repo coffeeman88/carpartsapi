@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "carpart")
-public class CarPart implements java.io.Serializable{
+public class CarPart implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -35,9 +33,8 @@ public class CarPart implements java.io.Serializable{
     @JsonIgnore
     private List<Car> cars;
 
-    @OneToMany(mappedBy = "carParts", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "carParts", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
-    //@JsonIgnore
     private List<ServiceAction> serviceAction = new ArrayList<>();
 
     public void setSA(List<ServiceAction> sas) {
