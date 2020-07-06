@@ -2,12 +2,9 @@ package com.parts.carpartsapi.api;
 
 import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
-
 import com.parts.carpartsapi.manager.CarPartManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -63,7 +60,7 @@ public class CarpartApi {
     }
 
     @PutMapping(value = "/{id}/addserviceaction")
-    public void addServiceAction(@PathVariable Long id, @RequestBody ServiceAction serviceAction) {
+    public void addServiceAction(@PathVariable Long id, @RequestBody ServiceAction serviceAction) throws Exception {
         carPartManager.addServiceAction(id, serviceAction);
     }
 

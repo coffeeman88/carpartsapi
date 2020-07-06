@@ -108,7 +108,7 @@ public class CarPartManagerTest {
     }
 
     @Test
-    public void testAddServiceAction() {
+    public void testAddServiceAction() throws Exception {
         CarPartManager carPartManager = mock(CarPartManager.class);
         ServiceAction serviceAction = mock(ServiceAction.class);
         doNothing().when(carPartManager).addServiceAction(isA(Long.class), isA(ServiceAction.class));
@@ -120,8 +120,8 @@ public class CarPartManagerTest {
     public List<CarPart> preparedCarPartsMock() {
         ServiceAction serviceAction = new ServiceAction();
         serviceAction.setActname("Smarowanie");
-        serviceAction.setServStartDate(LocalDate.of(2020, 05, 01));
-        serviceAction.setServEndDate(LocalDate.of(2020, 05, 03));
+        serviceAction.setServStartDate(LocalDate.of(2020, 5, 1));
+        serviceAction.setServEndDate(LocalDate.of(2020, 5, 3));
 
         Car car = new Car();
         car.setBrand("MAZDA");

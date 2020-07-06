@@ -91,14 +91,19 @@ public class CarPartManager {
         save(carPart);
     }
 
-    public void addServiceAction(Long id, ServiceAction serviceAction) {
+    public void addServiceAction(Long id, ServiceAction serviceAction) throws Exception {
         CarPart carPartupdate = carPartRepository.findByid(id);
-        List<ServiceAction> list = new ArrayList();
-        list.add(serviceAction);
-        carPartupdate.getServiceAction().addAll(list);
-        serviceAction.setCarParts(carPartupdate);
-        save(carPartupdate);
-
+       if (carPartupdate!=null)
+           try {
+               List<ServiceAction> list = new ArrayList();
+               list.add(serviceAction);
+               carPartupdate.getServiceAction().addAll(list);
+               serviceAction.setCarParts(carPartupdate);
+               save(carPartupdate);
+           }
+       catch (Exception e){
+               e.printStackTrace();
+       }
 
     }
 
