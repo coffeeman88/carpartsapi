@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CarPartManager {
@@ -54,15 +55,15 @@ public class CarPartManager {
 
     public String getShippingDaysById(Long id) {
 
-    CarPart carPart = carPartRepository.findByid(id);
-    if (carPart != null) {
-        if (id % 2 == 0)
-            return "Part is AVAILABLE, the next shipping date is: " + addDaysSkippingWeekends(LocalDateTime.now(),
-                    carPart.getShippingdays()).toString();
-        else
-            return "The part is currently UNAVAILABLE.";
-    } else
-        return "WARNING! Haven't found part with id: " + id;
+        CarPart carPart = carPartRepository.findByid(id);
+        if (carPart != null) {
+            if (id % 2 == 0)
+                return "Part is AVAILABLE, the next shipping date is: " + addDaysSkippingWeekends(LocalDateTime.now(),
+                        carPart.getShippingdays()).toString();
+            else
+                return "The part is currently UNAVAILABLE.";
+        } else
+            return "WARNING! Haven't found part with id: " + id;
 
     }
 

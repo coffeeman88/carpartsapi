@@ -1,7 +1,6 @@
 package com.parts.carpartsapi.manager;
 
 import com.parts.carpartsapi.entity.Car;
-import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +31,7 @@ public class CarManager {
     public List<Car> findByBrand(String brand) {
         return carRepository.findCarByBrandContainingIgnoreCase(brand);
     }
+
     public Car save(Car car) {
 
         return carRepository.save(car);
