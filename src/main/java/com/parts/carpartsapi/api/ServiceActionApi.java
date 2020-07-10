@@ -3,7 +3,10 @@ package com.parts.carpartsapi.api;
 import com.parts.carpartsapi.entity.ServiceAction;
 import com.parts.carpartsapi.manager.ServiceActionManager;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,6 +30,4 @@ public class ServiceActionApi {
                                          @RequestParam(value = "end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
         return serviceActionManager.getSAbyDate(start, end);
     }
-
-
 }

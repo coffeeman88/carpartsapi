@@ -1,6 +1,6 @@
 package com.parts.carpartsapi.entity;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +24,4 @@ public class ServiceAction implements java.io.Serializable {
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private CarPart carParts;
-
-
 }

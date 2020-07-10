@@ -3,12 +3,10 @@ package com.parts.carpartsapi.api;
 import com.google.gson.Gson;
 import com.parts.carpartsapi.entity.Car;
 import com.parts.carpartsapi.manager.CarManager;
-import com.parts.carpartsapi.repository.CarRepository;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,26 +21,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.slf4j.MDC.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static sun.misc.Version.print;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CarApi.class)
 class CarApiIntegrationTest {
 
-//
-@Autowired
-private MockMvc mvc;
-@MockBean
-private CarManager carManager;
-
+    @Autowired
+    private MockMvc mvc;
+    @MockBean
+    private CarManager carManager;
 
     @Test
     void getAll() throws Exception {
@@ -55,12 +48,11 @@ private CarManager carManager;
 
     @Test
     void getAllByBrandAndModel() throws Exception {
-        when(carManager.findByBrandAndModel(anyString(),anyString())).thenReturn(preparedMockDataCars());
+        when(carManager.findByBrandAndModel(anyString(), anyString())).thenReturn(preparedMockDataCars());
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/cars/brandmodel?brand=AUDI&model=A4");
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         assertEquals("application/json", result.getResponse().getContentType());
         Assert.assertThat(result.getResponse().getContentAsString(), Matchers.containsString("A6"));
-
     }
 
     @Test
@@ -70,7 +62,6 @@ private CarManager carManager;
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         assertEquals("application/json", result.getResponse().getContentType());
         Assert.assertThat(result.getResponse().getContentAsString(), Matchers.containsString("OPEL"));
-
     }
 
     @Test
@@ -81,9 +72,7 @@ private CarManager carManager;
         when(carManager.save(any())).thenReturn(preparedMockDataCars().get(0));
         this.mvc.perform(put("/api/cars/add").contentType(MediaType.APPLICATION_JSON).content(json)).
                 andExpect(status().isOk()).andReturn();
-
     }
-
 
     private List<Car> preparedMockDataCars() {
         List<Car> cars = new ArrayList<>();

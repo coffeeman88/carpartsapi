@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
-
 @Service
 public class ServiceActionManager {
     ServiceActionRepository serviceActionRepository;
@@ -21,7 +20,6 @@ public class ServiceActionManager {
     public ServiceActionManager() {
     }
 
-
     public List<ServiceAction> getSA() {
         return serviceActionRepository.findAll();
     }
@@ -29,6 +27,4 @@ public class ServiceActionManager {
     public List<ServiceAction> getSAbyDate(LocalDate start, LocalDate end) {
         return serviceActionRepository.findServiceActionByServStartDateBetween(start, end);
     }
-
-
 }

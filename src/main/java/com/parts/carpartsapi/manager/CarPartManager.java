@@ -34,12 +34,10 @@ public class CarPartManager {
 
 
     public List<CarPart> getParts() {
-
         return carPartRepository.findAll();
     }
 
     public CarPart save(CarPart carPart) {
-
         return carPartRepository.save(carPart);
     }
 
@@ -52,25 +50,19 @@ public class CarPartManager {
         return carPartRepository.findCarPartByCarsBrandContainingIgnoreCaseAndCarsModelContainingIgnoreCase(brand, model);
     }
 
-
     public String getShippingDaysById(Long id) {
-
         CarPart carPart = carPartRepository.findByid(id);
-
-            if (carPart != null) {
-                if (id % 2 == 0)
-                    return "Part is AVAILABLE, the next shipping date is: " + addDaysSkippingWeekends(LocalDateTime.now(),
-                            carPart.getShippingdays()).toString();
-                else
-                    return "The part is currently UNAVAILABLE.";
-            } else
-                return "WARNING! Haven't found part with id: " + id;
-
-
+        if (carPart != null) {
+            if (id % 2 == 0)
+                return "Part is AVAILABLE, the next shipping date is: " + addDaysSkippingWeekends(LocalDateTime.now(),
+                        carPart.getShippingdays()).toString();
+            else
+                return "The part is currently UNAVAILABLE.";
+        } else
+            return "WARNING! Haven't found part with id: " + id;
     }
 
     public void clearTags(Long id) {
-
         CarPart carPart = carPartRepository.findByid(id);
         try {
             List<String> l = carPart.getTags();
@@ -83,11 +75,7 @@ public class CarPartManager {
     }
 
     public CarPart getById(Long id) {
-
-
         return carPartRepository.findByid(id);
-
-
     }
 
     public void changeDescription(Long id, CarPart newCarPart) {
@@ -111,7 +99,6 @@ public class CarPartManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 

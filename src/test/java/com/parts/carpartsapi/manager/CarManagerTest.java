@@ -1,8 +1,6 @@
 package com.parts.carpartsapi.manager;
 
 import com.parts.carpartsapi.entity.Car;
-import com.parts.carpartsapi.entity.CarPart;
-import com.parts.carpartsapi.entity.ServiceAction;
 import com.parts.carpartsapi.repository.CarRepository;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -18,13 +16,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CarManagerTest extends CarManager {
-
     @Mock
     CarRepository carRepository;
     @InjectMocks
@@ -37,7 +34,6 @@ class CarManagerTest extends CarManager {
 
     @Test
     public void testGetCars() {
-
         CarManager carManager = new CarManager(carRepository);
         when(carRepository.findAll()).thenReturn(preparedMockDataCars());
         List<Car> cars = carManager.getCars();
@@ -51,8 +47,6 @@ class CarManagerTest extends CarManager {
         when(carRepository.findCarByBrandContainingIgnoreCase(anyString())).thenReturn(preparedMockDataCars());
         List<Car> cars = carManager.findByBrand("");
         Assert.assertThat(cars.get(1).getModel(), Matchers.equalTo("ASTRA H"));
-
-
     }
 
     @Test
@@ -62,7 +56,6 @@ class CarManagerTest extends CarManager {
         List<Car> cars = carManager.findByBrandAndModel("", "");
         Assert.assertThat(cars.get(2).getBrand(), Matchers.equalTo("AUDI"));
         Assert.assertThat(cars.get(1).getModel(), Matchers.not("POLO"));
-
     }
 
     @Test
@@ -73,8 +66,6 @@ class CarManagerTest extends CarManager {
         car = carManager.save(car);
         Assert.assertThat(car.getModel(), Matchers.equalTo("A4"));
         Assert.assertThat(car.getModel(), Matchers.not("BMW"));
-
-
     }
 
     private List<Car> preparedMockDataCars() {

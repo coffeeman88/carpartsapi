@@ -33,7 +33,6 @@ public class CarManager {
     }
 
     public Car save(Car car) {
-
         return carRepository.save(car);
     }
 }

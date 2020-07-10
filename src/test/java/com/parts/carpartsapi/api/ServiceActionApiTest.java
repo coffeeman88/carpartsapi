@@ -1,7 +1,6 @@
 package com.parts.carpartsapi.api;
 
 import com.parts.carpartsapi.entity.ServiceAction;
-import com.parts.carpartsapi.manager.CarManager;
 import com.parts.carpartsapi.manager.ServiceActionManager;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -34,7 +33,6 @@ class ServiceActionApiTest {
     @MockBean
     ServiceActionManager serviceActionManager;
 
-
     @Test
     void getAllSA() throws Exception {
         when(serviceActionManager.getSA()).thenReturn(preparedServiceActionsMock());
@@ -42,12 +40,11 @@ class ServiceActionApiTest {
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         assertEquals("application/json", result.getResponse().getContentType());
         Assert.assertThat(result.getResponse().getContentAsString(), Matchers.containsString("Wymiana"));
-
     }
 
     @Test
     void getByDate() throws Exception {
-        when(serviceActionManager.getSAbyDate(any(),any())).thenReturn(preparedServiceActionsMock());
+        when(serviceActionManager.getSAbyDate(any(), any())).thenReturn(preparedServiceActionsMock());
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/sa/getbydate?start=2020-05-01&end=2020-05-03");
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         assertEquals("application/json", result.getResponse().getContentType());

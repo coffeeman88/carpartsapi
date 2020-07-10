@@ -17,7 +17,6 @@ public class LoggingAdvice {
 
     @Pointcut(value = "execution(* com.parts.carpartsapi.manager.*.*(..) ) ")
     public void PointCut() {
-
     }
 
     @AfterThrowing(pointcut = "execution(* com.parts.carpartsapi.manager.*.*(..) ) ", throwing = "ex")
@@ -36,5 +35,4 @@ public class LoggingAdvice {
         log.info(className + " : " + methodName + "()" + "Response: " + mapper.writeValueAsString(object));
         return object;
     }
-
 }

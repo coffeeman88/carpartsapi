@@ -2,12 +2,9 @@ package com.parts.carpartsapi.api;
 
 import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
-
 import com.parts.carpartsapi.manager.CarPartManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -23,15 +20,10 @@ public class CarpartApi {
 
     @GetMapping("/all")
     public List<CarPart> getAll() {
-
-            return carPartManager.getParts();
-
+        return carPartManager.getParts();
     }
 
-
-
-
-   @GetMapping("/brandmodel")
+    @GetMapping("/brandmodel")
     public List<CarPart> getByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
         return carPartManager.getAllPartsForBrandAndModel(brand, model);
     }
@@ -66,8 +58,6 @@ public class CarpartApi {
     public void addServiceAction(@PathVariable Long id, @RequestBody ServiceAction serviceAction) {
         carPartManager.addServiceAction(id, serviceAction);
     }
-
-
 }
 
 

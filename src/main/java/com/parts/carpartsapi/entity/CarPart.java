@@ -1,6 +1,7 @@
 package com.parts.carpartsapi.entity;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,14 +37,4 @@ public class CarPart implements java.io.Serializable {
     @OneToMany(mappedBy = "carParts", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<ServiceAction> serviceAction = new ArrayList<>();
-
-    public void setSA(List<ServiceAction> sas) {
-        if (this.serviceAction == null) {
-            this.serviceAction = sas;
-        } else {
-            this.serviceAction.retainAll(sas);
-            this.serviceAction.addAll(sas);
-        }
-    }
-
 }

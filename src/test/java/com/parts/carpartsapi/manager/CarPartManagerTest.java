@@ -8,7 +8,6 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -23,8 +22,6 @@ import static org.mockito.Mockito.*;
 public class CarPartManagerTest {
     @Mock
     CarPartRepository carPartRepository;
-    @InjectMocks
-    CarPartManager carPartManager;
 
     @BeforeEach
     void setup() {
@@ -48,7 +45,6 @@ public class CarPartManagerTest {
         carPart = carPartManager.save(carPart);
         Assert.assertThat(carPart.getPrice(), Matchers.equalTo(200.0));
         Assert.assertThat(carPart.getCars().get(0).getBrand(), Matchers.equalTo("MAZDA"));
-
     }
 
     @Test
@@ -84,7 +80,6 @@ public class CarPartManagerTest {
         doNothing().when(carPartManager).clearTags(isA(Long.class));
         carPartManager.clearTags(1L);
         verify(carPartManager).clearTags(1L);
-
     }
 
     @Test
@@ -104,7 +99,6 @@ public class CarPartManagerTest {
         doNothing().when(carPartManager).changeDescription(isA(Long.class), isA(CarPart.class));
         carPartManager.changeDescription(1L, carPart);
         verify(carPartManager, times(1)).changeDescription(1L, carPart);
-
     }
 
     @Test
@@ -114,7 +108,6 @@ public class CarPartManagerTest {
         doNothing().when(carPartManager).addServiceAction(isA(Long.class), isA(ServiceAction.class));
         carPartManager.addServiceAction(1L, serviceAction);
         verify(carPartManager, times(1)).addServiceAction(1L, serviceAction);
-
     }
 
     public List<CarPart> preparedCarPartsMock() {
@@ -122,11 +115,9 @@ public class CarPartManagerTest {
         serviceAction.setActname("Smarowanie");
         serviceAction.setServStartDate(LocalDate.of(2020, 05, 01));
         serviceAction.setServEndDate(LocalDate.of(2020, 05, 03));
-
         Car car = new Car();
         car.setBrand("MAZDA");
         car.setModel("6");
-
         CarPart carPart = new CarPart();
         carPart.setCpartname("Lozysko XYZ");
         carPart.setShippingdays(2);
@@ -138,11 +129,8 @@ public class CarPartManagerTest {
         carPart.setId(2L);
         car.setParts(Arrays.asList(carPart));
         serviceAction.setCarParts(carPart);
-
         List<CarPart> list = new ArrayList<>();
         list.addAll(Arrays.asList(carPart));
         return list;
-
-
     }
 }

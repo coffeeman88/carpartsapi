@@ -8,32 +8,27 @@ import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
 import com.parts.carpartsapi.manager.CarManager;
 import com.parts.carpartsapi.manager.CarPartManager;
-
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -41,9 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CarpartApi.class)
-
 class CarpartApiTest {
-
 
     @Autowired
     private MockMvc mvc;
@@ -93,10 +86,8 @@ class CarpartApiTest {
 
     @Test
     void testWhenWillBeShipped() throws Exception {
-
         this.mvc.perform(get("/api/parts/2/shipping")).
                 andExpect(status().isOk()).andReturn();
-
         verify(carPartManager, times(1)).getShippingDaysById(2L);
     }
 
@@ -105,45 +96,35 @@ class CarpartApiTest {
         this.mvc.perform(get("/api/parts/2/cleartags")).
                 andExpect(status().isOk()).andReturn();
         verify(carPartManager, times(1)).clearTags(2L);
-
-
     }
 
     @Test
     void testChangeDescription() throws Exception {
-
         Gson gson = new Gson();
         JsonObject json = new JsonObject();
-
         json.addProperty("cpartname", "Sprezyna amortyzatora ABC");
         json.addProperty("description", "Sprezyna amortyzatora ");
         json.addProperty("price", 59.99);
         json.add("tags", null);
         json.addProperty("shippingdays", 14);
         json.add("cars", null);
-
         String jason = gson.toJson(json);
         this.mvc.perform(put("/api/parts/2/changedescription").contentType(MediaType.APPLICATION_JSON).content(jason)).
                 andExpect(status().isOk()).andReturn();
-
-
     }
 
     @Test
     void add() throws Exception {
-               JsonObject jsonObject = new JsonObject();
+        JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("actname", "Wymiana sprezynki");
         jsonObject.addProperty("servStartDate", "2020-06-01");
         jsonObject.addProperty("servEndDate", "2020-06-15");
-
         Gson gson = new Gson();
         String jason = gson.toJson(jsonObject);
         System.out.println(jason);
         this.mvc.perform(put("/api/parts/2/addserviceaction").contentType(MediaType.APPLICATION_JSON).content(jason)).
                 andExpect(status().isOk()).andReturn();
-
     }
-
 
     public List<CarPart> preparedCarPartsMock() {
         ServiceAction serviceAction = new ServiceAction();
@@ -172,30 +153,5 @@ class CarpartApiTest {
         return list;
 
 
-    }
-
-    public List<ServiceAction> preparedServiceActionsMock() {
-        List<ServiceAction> list = new ArrayList<>();
-
-        ServiceAction serviceAction = new ServiceAction();
-        serviceAction.setCarParts(null);
-        serviceAction.setServStartDate(LocalDate.of(2020, 05, 01));
-        serviceAction.setServEndDate(LocalDate.of(2020, 05, 10));
-        serviceAction.setActname("Naprawa kola");
-
-        ServiceAction serviceAction1 = new ServiceAction();
-        serviceAction1.setCarParts(null);
-        serviceAction1.setServStartDate(LocalDate.of(2020, 04, 03));
-        serviceAction1.setServEndDate(LocalDate.of(2020, 04, 5));
-        serviceAction1.setActname("Wymiana swiec + polerowanie");
-
-        ServiceAction serviceAction2 = new ServiceAction();
-        serviceAction2.setCarParts(null);
-        serviceAction2.setServStartDate(LocalDate.of(2020, 06, 10));
-        serviceAction2.setServEndDate(LocalDate.of(2020, 06, 18));
-        serviceAction2.setActname("Wymiana elementu");
-
-        list.addAll(Arrays.asList(serviceAction, serviceAction1, serviceAction2));
-        return list;
     }
 }

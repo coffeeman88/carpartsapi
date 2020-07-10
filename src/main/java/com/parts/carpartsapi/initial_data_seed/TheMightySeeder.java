@@ -14,20 +14,14 @@ import java.util.Arrays;
 @Component
 public class TheMightySeeder {
 
-
     public CarPartManager carPartManager;
 
     public TheMightySeeder(CarPartManager carPartManager) {
         this.carPartManager = carPartManager;
     }
 
-
-
-
     @EventListener(value = ApplicationReadyEvent.class)
     private void PopulateDB() {
-
-        //CARS
         Car car = new Car();
         CarPart carPart = new CarPart();
         ServiceAction serviceAction = new ServiceAction();
@@ -35,25 +29,19 @@ public class TheMightySeeder {
         car.setModel("ACCORD");
         car.setProdStartDate(LocalDate.of(2002, 5, 12));
         car.setProdEndDate((LocalDate.of(2010, 12, 01)));
-
         carPart.setCpartname("Amortyzator XYZ");
         carPart.setDescription("Amortyzator firmy XYZ. Opis ......... Wymiary 122x322x122...");
         carPart.setPrice(199.99);
         carPart.setShippingdays(1);
         carPart.setTags(Arrays.asList("Doskonaly wybor", "Swietna marka", "Ceniony na rynku"));
-
-
         serviceAction.setActname("Wymiana sprezyny");
         serviceAction.setServStartDate(LocalDate.of(2020, 06, 01));
         serviceAction.setServEndDate(LocalDate.of(2020, 06, 15));
         carPart.setServiceAction(Arrays.asList(serviceAction));
         serviceAction.setCarParts(carPart);
         car.setParts(Arrays.asList(carPart));
-
         carPart.setCars(Arrays.asList(car));
         carPartManager.save(carPart);
-
-
         Car car2 = new Car();
         car2.setBrand("AUDI");
         car2.setModel("A4 B6");
@@ -83,49 +71,41 @@ public class TheMightySeeder {
         car2.setParts(Arrays.asList(carPart2, carPart3));
         car3.setParts(Arrays.asList(carPart2, carPart3));
         carPartManager.save(carPart2);
-
         Car car5 = new Car();
         car5.setBrand("AUDI");
         car5.setModel("A8");
-        car5.setProdEndDate(LocalDate.of(2010,01,01));
-        car5.setProdStartDate(LocalDate.of(2018,05,03));
-
-
+        car5.setProdEndDate(LocalDate.of(2010, 01, 01));
+        car5.setProdStartDate(LocalDate.of(2018, 05, 03));
         CarPart carPart4 = new CarPart();
         carPart4.setCpartname("Kierownica AUDI");
         carPart4.setTags(Arrays.asList("Najlepsza w swoim rodzaju", "Najlepsza jakosc"));
         carPart4.setPrice(399);
         carPart4.setDescription("Wspaniala kierownica do Twojego AUDI");
         carPart4.setCars(Arrays.asList(car5));
-
-
         CarPart carPart5 = new CarPart();
         carPart5.setCpartname("GRILL AUDI");
         carPart5.setTags(Arrays.asList("Swietny element", "Ponadprzecietna zywotnosc"));
         carPart5.setPrice(199);
         carPart5.setDescription("Chromowany grill");
         carPart5.setCars(Arrays.asList(car5));
-        car5.setParts(Arrays.asList(carPart5,carPart4));
+        car5.setParts(Arrays.asList(carPart5, carPart4));
         carPart4.setShippingdays(3);
         carPart4.setShippingdays(4);
         carPartManager.save(carPart4);
         carPartManager.save(carPart5);
-
         Car car4 = new Car();
         car4.setBrand("OPEL");
         car4.setModel("ASTRA H");
-        car4.setProdStartDate(LocalDate.of(2000,01,01));
-        car4.setProdEndDate(LocalDate.of(2010,01,01));
-
+        car4.setProdStartDate(LocalDate.of(2000, 01, 01));
+        car4.setProdEndDate(LocalDate.of(2010, 01, 01));
         ServiceAction serviceAction1 = new ServiceAction();
         serviceAction1.setActname("Nawlekanie nowego uzwojenia");
-        serviceAction1.setServStartDate(LocalDate.of(2020,02,01));
-        serviceAction1.setServEndDate(LocalDate.of(2020,02,13));
+        serviceAction1.setServStartDate(LocalDate.of(2020, 02, 01));
+        serviceAction1.setServEndDate(LocalDate.of(2020, 02, 13));
         ServiceAction serviceAction2 = new ServiceAction();
         serviceAction2.setActname("Wymiana opornika");
-        serviceAction2.setServStartDate(LocalDate.of(2020,03,01));
-        serviceAction2.setServEndDate(LocalDate.of(2020,03,05));
-
+        serviceAction2.setServStartDate(LocalDate.of(2020, 03, 01));
+        serviceAction2.setServEndDate(LocalDate.of(2020, 03, 05));
         CarPart carPart6 = new CarPart();
         carPart6.setCpartname("Silnik wycieraczek Opel");
         carPart6.setTags(Arrays.asList("Swietny element", "Ponadprzecietna zywotnosc"));
@@ -138,7 +118,7 @@ public class TheMightySeeder {
         CarPart carPart7 = new CarPart();
         carPart7.setCpartname("Szyba");
         carPart7.setDescription("Szyba przednia");
-        carPart7.setTags(Arrays.asList("Doskonala jakosc", "Krystaliczny widok"));
+        carPart7.setTags(Arrays.asList("Doskonala jakosc", "Krystaliczny widok na zewnatrz"));
         carPart7.setShippingdays(3);
         carPart7.setPrice(599);
         carPart7.setCars(Arrays.asList(car4));
@@ -163,16 +143,11 @@ public class TheMightySeeder {
         carPart10.setShippingdays(3);
         carPart10.setPrice(400);
         carPart10.setCars(Arrays.asList(car4));
-        car4.setParts(Arrays.asList(carPart7,carPart6,carPart8,carPart9,carPart10));
+        car4.setParts(Arrays.asList(carPart7, carPart6, carPart8, carPart9, carPart10));
         carPartManager.save(carPart6);
         carPartManager.save(carPart7);
         carPartManager.save(carPart8);
         carPartManager.save(carPart9);
         carPartManager.save(carPart10);
-
-
-
-
-
     }
 }

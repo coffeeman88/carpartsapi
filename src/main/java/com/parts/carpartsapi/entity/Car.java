@@ -25,6 +25,4 @@ public class Car implements java.io.Serializable {
     @JsonBackReference
     @ManyToMany(mappedBy = "cars", cascade = CascadeType.ALL)
     private List<CarPart> parts;
-
-
 }

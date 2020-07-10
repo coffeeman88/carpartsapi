@@ -22,12 +22,9 @@ public class CarApi {
         return carManager.getCars();
     }
 
-
     @GetMapping("/brandmodel")
     public List<Car> getAllByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
-
         return carManager.findByBrandAndModel(brand, model);
-
     }
 
     @GetMapping("/brand")
