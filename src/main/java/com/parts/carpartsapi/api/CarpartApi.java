@@ -1,9 +1,7 @@
 package com.parts.carpartsapi.api;
 
-import com.parts.carpartsapi.dto.CarDTO;
 import com.parts.carpartsapi.dto.CarPartDTO;
 import com.parts.carpartsapi.dto.ServiceActionDTO;
-import com.parts.carpartsapi.entity.Car;
 import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
 import com.parts.carpartsapi.manager.CarPartManager;
@@ -80,18 +78,15 @@ public class CarpartApi {
     }
 
     private CarPartDTO convertCarPartToDTO(CarPart carPart) {
-        CarPartDTO carPartDTO = modelMapper.map(carPart, CarPartDTO.class);
-        return carPartDTO;
+        return modelMapper.map(carPart, CarPartDTO.class);
     }
 
     private CarPart convertDTOToCarPart(CarPartDTO carPartDTO) {
-        CarPart carPart = modelMapper.map(carPartDTO, CarPart.class);
-        return carPart;
+        return modelMapper.map(carPartDTO, CarPart.class);
     }
 
-    private ServiceAction convertDTOToServiceAction (ServiceActionDTO serviceActionDTO){
-        ServiceAction serviceAction = modelMapper.map(serviceActionDTO, ServiceAction.class);
-        return serviceAction;
+    private ServiceAction convertDTOToServiceAction(ServiceActionDTO serviceActionDTO) {
+        return modelMapper.map(serviceActionDTO, ServiceAction.class);
     }
 
 }

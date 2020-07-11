@@ -33,7 +33,7 @@ class ServiceActionManagerTest {
     public void testGetSA() {
         ServiceActionManager serviceActionManager = new ServiceActionManager(serviceActionRepository);
         when(serviceActionRepository.findAll()).thenReturn(preparedServiceActionsMock());
-        List<ServiceAction> list = serviceActionManager.getSA();
+        List<ServiceAction> list = serviceActionManager.getServiceActions();
         Assert.assertThat(list, Matchers.hasSize(3));
         Assert.assertThat(list.get(0).getServStartDate(), Matchers.equalTo(LocalDate.of(2020, 05, 01)));
     }
@@ -42,7 +42,7 @@ class ServiceActionManagerTest {
     public void testGetSAbyDate() {
         ServiceActionManager serviceActionManager = new ServiceActionManager(serviceActionRepository);
         when(serviceActionRepository.findServiceActionByServStartDateBetween(LocalDate.now(), LocalDate.now())).thenReturn(preparedServiceActionsMock());
-        List<ServiceAction> list = serviceActionManager.getSAbyDate(LocalDate.now(), LocalDate.now());
+        List<ServiceAction> list = serviceActionManager.getServiceActionsByDate(LocalDate.now(), LocalDate.now());
         Assert.assertThat(list, Matchers.hasSize(3));
         Assert.assertThat(list.get(2).getActname(), Matchers.equalTo("Wymiana elementu"));
     }

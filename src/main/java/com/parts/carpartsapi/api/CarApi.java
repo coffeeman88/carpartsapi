@@ -7,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,12 +53,10 @@ public class CarApi {
     }
 
     private CarDTO convertCarToDTO(Car car) {
-        CarDTO carDTO = modelMapper.map(car, CarDTO.class);
-        return carDTO;
+        return modelMapper.map(car, CarDTO.class);
     }
 
     private Car convertDTOToCar(CarDTO carDTO) {
-        Car car = modelMapper.map(carDTO, Car.class);
-        return car;
+        return modelMapper.map(carDTO, Car.class);
     }
 }

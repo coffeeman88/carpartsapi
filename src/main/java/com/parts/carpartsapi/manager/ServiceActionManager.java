@@ -20,11 +20,11 @@ public class ServiceActionManager {
     public ServiceActionManager() {
     }
 
-    public List<ServiceAction> getSA() {
+    public List<ServiceAction> getServiceActions() {
         return serviceActionRepository.findAll();
     }
 
-    public List<ServiceAction> getSAbyDate(LocalDate start, LocalDate end) {
+    public List<ServiceAction> getServiceActionsByDate(LocalDate start, LocalDate end) {
         return serviceActionRepository.findServiceActionByServStartDateBetween(start, end);
     }
 }

@@ -35,7 +35,7 @@ class ServiceActionApiTest {
 
     @Test
     void getAllSA() throws Exception {
-        when(serviceActionManager.getSA()).thenReturn(preparedServiceActionsMock());
+        when(serviceActionManager.getServiceActions()).thenReturn(preparedServiceActionsMock());
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/sa/all");
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         assertEquals("application/json", result.getResponse().getContentType());
@@ -44,7 +44,7 @@ class ServiceActionApiTest {
 
     @Test
     void getByDate() throws Exception {
-        when(serviceActionManager.getSAbyDate(any(), any())).thenReturn(preparedServiceActionsMock());
+        when(serviceActionManager.getServiceActionsByDate(any(), any())).thenReturn(preparedServiceActionsMock());
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/sa/getbydate?start=2020-05-01&end=2020-05-03");
         MvcResult result = mvc.perform(requestBuilder).andReturn();
         assertEquals("application/json", result.getResponse().getContentType());
