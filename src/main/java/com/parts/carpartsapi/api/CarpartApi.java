@@ -1,6 +1,9 @@
 package com.parts.carpartsapi.api;
 
+import com.parts.carpartsapi.dto.CarDTO;
 import com.parts.carpartsapi.dto.CarPartDTO;
+import com.parts.carpartsapi.dto.ServiceActionDTO;
+import com.parts.carpartsapi.entity.Car;
 import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
 import com.parts.carpartsapi.manager.CarPartManager;
@@ -32,19 +35,26 @@ public class CarpartApi {
     }
 
     @GetMapping("/brandmodel")
-    public List<CarPart> getByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
-        return carPartManager.getAllPartsForBrandAndModel(brand, model);
+    public List<CarPartDTO> getByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
+        List<CarPart> list = carPartManager.getAllPartsForBrandAndModel(brand, model);
+        return list.stream()
+                .map(this::convertCarPartToDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/branddetailed")
-    public List<CarPart> getByBrandDetailed(@RequestParam String brand, @RequestParam String model,
-                                            @RequestParam String partname, @RequestParam String description) {
-        return carPartManager.getAllPartsForBrandDetailed(brand, model, partname, description);
+    public List<CarPartDTO> getByBrandDetailed(@RequestParam String brand, @RequestParam String model,
+                                               @RequestParam String partname, @RequestParam String description) {
+        List<CarPart> list = carPartManager.getAllPartsForBrandDetailed(brand, model, partname, description);
+        return list.stream()
+                .map(this::convertCarPartToDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public CarPart getById(@PathVariable Long id) {
-        return carPartManager.getById(id);
+    public CarPartDTO getById(@PathVariable Long id) {
+        CarPart carPart = carPartManager.getById(id);
+        return convertCarPartToDTO(carPart);
     }
 
     @GetMapping("/{id}/shipping")
@@ -58,18 +68,30 @@ public class CarpartApi {
     }
 
     @PutMapping("/{id}/changedescription")
-    public void changeDescription(@PathVariable Long id, @RequestBody CarPart carPart) {
+    public void changeDescription(@PathVariable Long id, @RequestBody CarPartDTO carPartDTO) {
+        CarPart carPart = convertDTOToCarPart(carPartDTO);
         carPartManager.changeDescription(id, carPart);
     }
 
     @PutMapping(value = "/{id}/addserviceaction")
-    public void addServiceAction(@PathVariable Long id, @RequestBody ServiceAction serviceAction) throws Exception {
+    public void addServiceAction(@PathVariable Long id, @RequestBody ServiceActionDTO serviceActionDTO) {
+        ServiceAction serviceAction = convertDTOToServiceAction(serviceActionDTO);
         carPartManager.addServiceAction(id, serviceAction);
     }
 
     private CarPartDTO convertCarPartToDTO(CarPart carPart) {
         CarPartDTO carPartDTO = modelMapper.map(carPart, CarPartDTO.class);
         return carPartDTO;
+    }
+
+    private CarPart convertDTOToCarPart(CarPartDTO carPartDTO) {
+        CarPart carPart = modelMapper.map(carPartDTO, CarPart.class);
+        return carPart;
+    }
+
+    private ServiceAction convertDTOToServiceAction (ServiceActionDTO serviceActionDTO){
+        ServiceAction serviceAction = modelMapper.map(serviceActionDTO, ServiceAction.class);
+        return serviceAction;
     }
 
 }

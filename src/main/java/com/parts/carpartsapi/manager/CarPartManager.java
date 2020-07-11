@@ -1,5 +1,6 @@
 package com.parts.carpartsapi.manager;
 
+import com.parts.carpartsapi.dto.CarPartDTO;
 import com.parts.carpartsapi.entity.CarPart;
 import com.parts.carpartsapi.entity.ServiceAction;
 import com.parts.carpartsapi.repository.CarPartRepository;
@@ -52,9 +53,7 @@ public class CarPartManager {
         return carPartRepository.findCarPartByCarsBrandContainingIgnoreCaseAndCarsModelContainingIgnoreCase(brand, model);
     }
 
-
     public String getShippingDaysById(Long id) {
-
         CarPart carPart = carPartRepository.findByid(id);
         if (carPart != null) {
             if (id % 2 == 0)
@@ -64,7 +63,6 @@ public class CarPartManager {
                 return "The part is currently UNAVAILABLE.";
         } else
             return "WARNING! Haven't found part with id: " + id;
-
     }
 
     public void clearTags(Long id) {
@@ -78,11 +76,7 @@ public class CarPartManager {
     }
 
     public CarPart getById(Long id) {
-
-
         return carPartRepository.findByid(id);
-
-
     }
 
     public void changeDescription(Long id, CarPart newCarPart) {
@@ -91,19 +85,18 @@ public class CarPartManager {
         save(carPart);
     }
 
-    public void addServiceAction(Long id, ServiceAction serviceAction) throws Exception {
+    public void addServiceAction(Long id, ServiceAction serviceAction) {
         CarPart carPartupdate = carPartRepository.findByid(id);
-       if (carPartupdate!=null)
-           try {
-               List<ServiceAction> list = new ArrayList();
-               list.add(serviceAction);
-               carPartupdate.getServiceAction().addAll(list);
-               serviceAction.setCarParts(carPartupdate);
-               save(carPartupdate);
-           }
-       catch (Exception e){
-               e.printStackTrace();
-       }
+        if (carPartupdate != null)
+            try {
+                List<ServiceAction> list = new ArrayList();
+                list.add(serviceAction);
+                carPartupdate.getServiceAction().addAll(list);
+                serviceAction.setCarParts(carPartupdate);
+                save(carPartupdate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
     }
 

@@ -49,7 +49,7 @@ public class CarApi {
 
     @PutMapping("/add")
     public void save(@RequestBody CarDTO carDTO) {
-        Car car = convertCarDTOToCar(carDTO);
+        Car car = convertDTOToCar(carDTO);
         carManager.save(car);
     }
 
@@ -58,9 +58,8 @@ public class CarApi {
         return carDTO;
     }
 
-    private Car convertCarDTOToCar(CarDTO carDTO) {
+    private Car convertDTOToCar(CarDTO carDTO) {
         Car car = modelMapper.map(carDTO, Car.class);
         return car;
     }
-
 }
