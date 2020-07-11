@@ -34,10 +34,12 @@ public class CarPartManager {
 
 
     public List<CarPart> getParts() {
+
         return carPartRepository.findAll();
     }
 
     public CarPart save(CarPart carPart) {
+
         return carPartRepository.save(carPart);
     }
 
@@ -50,7 +52,9 @@ public class CarPartManager {
         return carPartRepository.findCarPartByCarsBrandContainingIgnoreCaseAndCarsModelContainingIgnoreCase(brand, model);
     }
 
+
     public String getShippingDaysById(Long id) {
+
         CarPart carPart = carPartRepository.findByid(id);
         if (carPart != null) {
             if (id % 2 == 0)
@@ -60,45 +64,47 @@ public class CarPartManager {
                 return "The part is currently UNAVAILABLE.";
         } else
             return "WARNING! Haven't found part with id: " + id;
+
     }
 
     public void clearTags(Long id) {
+
         CarPart carPart = carPartRepository.findByid(id);
-        try {
-            List<String> l = carPart.getTags();
-            l.clear();
-            carPart.setTags(l);
-            save(carPart);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        List<String> l = carPart.getTags();
+        l.clear();
+        carPart.setTags(l);
+        save(carPart);
     }
 
     public CarPart getById(Long id) {
+
+
         return carPartRepository.findByid(id);
+
+
     }
 
     public void changeDescription(Long id, CarPart newCarPart) {
         CarPart carPart = carPartRepository.findByid(id);
-        try {
-            carPart.setDescription(newCarPart.getDescription());
-            save(carPart);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        carPart.setDescription(newCarPart.getDescription());
+        save(carPart);
     }
 
-    public void addServiceAction(Long id, ServiceAction serviceAction) {
+    public void addServiceAction(Long id, ServiceAction serviceAction) throws Exception {
         CarPart carPartupdate = carPartRepository.findByid(id);
-        try {
-            List<ServiceAction> list = new ArrayList();
-            list.add(serviceAction);
-            carPartupdate.getServiceAction().addAll(list);
-            serviceAction.setCarParts(carPartupdate);
-            save(carPartupdate);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       if (carPartupdate!=null)
+           try {
+               List<ServiceAction> list = new ArrayList();
+               list.add(serviceAction);
+               carPartupdate.getServiceAction().addAll(list);
+               serviceAction.setCarParts(carPartupdate);
+               save(carPartupdate);
+           }
+       catch (Exception e){
+               e.printStackTrace();
+       }
+
     }
 
 
