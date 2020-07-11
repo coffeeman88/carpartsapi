@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,30 +25,42 @@ public class CarApi {
 
     @GetMapping("/all")
     public List<CarDTO> getAll() {
-        List<Car> getCars = carManager.getCars();
-        return getCars.stream()
+        List<Car> list = carManager.getCars();
+        return list.stream()
                 .map(this::convertCarToDTO)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/brandmodel")
-    public List<Car> getAllByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
-        return carManager.findByBrandAndModel(brand, model);
+    public List<CarDTO> getAllByBrandAndModel(@RequestParam String brand, @RequestParam String model) {
+        List<Car> list = carManager.findByBrandAndModel(brand, model);
+        return list.stream()
+                .map(this::convertCarToDTO)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/brand")
-    public List<Car> getAllByBrand(@RequestParam String brand) {
-        return carManager.findByBrand(brand);
+    public List<CarDTO> getAllByBrand(@RequestParam String brand) {
+        List<Car> list = carManager.findByBrand(brand);
+        return list.stream()
+                .map(this::convertCarToDTO)
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/add")
-    public void save(@RequestBody Car car) {
+    public void save(@RequestBody CarDTO carDTO) {
+        Car car = convertCarDTOToCar(carDTO);
         carManager.save(car);
     }
 
     private CarDTO convertCarToDTO(Car car) {
         CarDTO carDTO = modelMapper.map(car, CarDTO.class);
         return carDTO;
+    }
+
+    private Car convertCarDTOToCar(CarDTO carDTO) {
+        Car car = modelMapper.map(carDTO, Car.class);
+        return car;
     }
 
 }
