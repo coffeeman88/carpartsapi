@@ -23,7 +23,6 @@ public class CarManager {
         return carRepository.findAll();
     }
 
-
     public List<Car> findByBrandAndModel(String brand, String model) {
         return carRepository.findCarByBrandContainingIgnoreCaseAndAndModelContainingIgnoreCase(brand, model);
     }
@@ -35,4 +34,7 @@ public class CarManager {
     public Car save(Car car) {
         return carRepository.save(car);
     }
+
+
+
 }
